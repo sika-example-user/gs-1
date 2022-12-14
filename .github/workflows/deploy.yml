@@ -10,8 +10,4 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            github.rest.repos.createDeployment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              ref: 'main',
-            })
+            console.log(JSON.stringify(context, null, 2))

@@ -1,13 +1,15 @@
 const { Octokit } = require("@octokit/rest");
 
+const { GITHUB_TOKEN } = process.env;
+
 const octokit = new Octokit({
-  auth: "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",
+  auth: GITHUB_TOKEN,
 });
 
 octokit.rest.repos.createDeployment({
   owner: "sika-example-user",
   repo: "gs-1",
-  ref: "f8013c941ebd235bcd099aaf782298392b7a2bfd",
+  ref: "main",
   payload: '{ "deploy": "migrate" }',
   description: 'Deploy request from hubot',
   production_environment: true,
