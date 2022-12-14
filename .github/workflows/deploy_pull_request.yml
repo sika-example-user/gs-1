@@ -15,13 +15,14 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            let url = "https://is.oxs.cz"
+            let url = "https://os.oxs.cz"
             let deployment = await github.rest.repos.createDeployment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: context.payload.after,
               production_environment: false,
               environment: "pull-1",
+              transient_environment: true,
               required_contexts: [],
             })
             github.rest.repos.createDeploymentStatus({
@@ -32,9 +33,9 @@ jobs:
               comment: "Yesss",
               log_url: url,
             })
-            github.rest.repos.createCommitComment({
+            github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              commit_sha: context.payload.after,
+              issue_number: context.issue.number,
               body: "Deployed to "+url,
             });
