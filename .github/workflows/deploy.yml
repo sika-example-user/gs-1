@@ -14,7 +14,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            octokit.rest.repos.createDeployment({
+            github.rest.repos.createDeployment({
               owner: "sika-example-user",
               repo: "gs-1",
               ref: "main",
@@ -22,7 +22,7 @@ jobs:
               description: 'Deploy request from hubot',
               production_environment: true,
             }).then(response => {
-              octokit.rest.repos.createDeploymentStatus({
+              github.rest.repos.createDeploymentStatus({
                 owner: "sika-example-user",
                 repo: "gs-1",
                 deployment_id: response.data.id,
