@@ -7,6 +7,15 @@ on:
       - main
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ttl.sh/example-${{ github.run_id }}
+
   deploy:
     runs-on: ubuntu-latest
 
