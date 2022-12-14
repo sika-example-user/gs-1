@@ -1,0 +1,11 @@
+{
+  "name": "gs-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://sika-example-user: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@github.com/sika-example-user/gs-1.git",
+  "author": "Ondrej Sika <ondrej@ondrejsika.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^19.0.5"
+  }
+}
