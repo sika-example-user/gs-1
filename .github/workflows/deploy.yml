@@ -11,22 +11,23 @@ jobs:
       deployments: write
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: chrnorm/deployment-action@v2
-        name: Create GitHub deployment
-        id: deployment
-        with:
-          token: '${{ github.token }}'
-          environment-url: http://my-app-url.com
-          environment: production
       - uses: actions/github-script@v6
         with:
           script: |
-            github.rest.repos.createDeploymentStatus({
+            octokit.rest.repos.createDeployment({
               owner: "sika-example-user",
               repo: "gs-1",
-              deployment_id: "${{steps.deployment.outputs.deployment_id}}",
-              state: "success",
-              comment: "Yesss",
-              log_url: "https://google.com",
+              ref: "main",
+              payload: '{ "deploy": "migrate" }',
+              description: 'Deploy request from hubot',
+              production_environment: true,
+            }).then(response => {
+              octokit.rest.repos.createDeploymentStatus({
+                owner: "sika-example-user",
+                repo: "gs-1",
+                deployment_id: response.data.id,
+                state: "success",
+                comment: "Yesss",
+                log_url: "https://oxs.cz",
+              })
             })
