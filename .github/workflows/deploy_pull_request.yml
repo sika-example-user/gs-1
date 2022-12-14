@@ -41,7 +41,7 @@ jobs:
         with:
           script: |
             console.log(JSON.stringify(context))
-            let url = "example-pull-${{ github.event.number}}.k8s.sikademo.com"
+            let url = "https://example-pull-${{ github.event.number}}.k8s.sikademo.com"
             let deployment = await github.rest.repos.createDeployment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -63,5 +63,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: "Deployed to https://"+url,
+              body: "Deployed to "+url,
             });
