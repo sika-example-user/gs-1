@@ -30,7 +30,7 @@ jobs:
               comment: "Yesss",
               log_url: url,
             })
-            octokit.rest.repos.createCommitComment({
+            github.rest.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: context.payload.after,
