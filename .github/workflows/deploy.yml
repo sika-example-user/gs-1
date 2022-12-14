@@ -19,4 +19,4 @@ jobs:
               payload: '{ "deploy": "migrate" }',
               description: 'Deploy request from hubot',
               production_environment: true,
-            }
+            })
