@@ -21,7 +21,7 @@ jobs:
               repo: context.repo.repo,
               ref: context.payload.after,
               production_environment: false,
-              environment: "pull-1"
+              environment: "pull-1",
               required_contexts: [],
             })
             github.rest.repos.createDeploymentStatus({
