@@ -1,3 +1,5 @@
+name: Delete Environment
+
 on:
   pull_request:
     types: [closed]
