@@ -22,7 +22,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            octokit.rest.repos.createDeploymentStatus({
+            github.rest.repos.createDeploymentStatus({
               owner: "sika-example-user",
               repo: "gs-1",
               deployment_id: "${{steps.deployment.outputs.deployment_id}}",
