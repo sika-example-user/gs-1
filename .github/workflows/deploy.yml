@@ -11,3 +11,18 @@ jobs:
         with:
           script: |
             console.log(JSON.stringify(context, null, 2))
+            github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.after,
+              production_environment: true,
+            }).then(response => {
+              github.rest.repos.createDeploymentStatus({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                deployment_id: response.data.id,
+                state: "success",
+                comment: "Yesss",
+                log_url: "https://google.com",
+              })
+            })
