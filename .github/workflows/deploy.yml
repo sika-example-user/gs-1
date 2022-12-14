@@ -12,8 +12,11 @@ jobs:
 
     steps:
       - uses: actions/github-script@v6
+        id: start
         with:
+          result-encoding: string
           script: |
+            let output;
             github.rest.repos.createDeployment({
               owner: "sika-example-user",
               repo: "gs-1",
@@ -22,12 +25,18 @@ jobs:
               description: 'Deploy request from hubot',
               production_environment: true,
             }).then(response => {
-              github.rest.repos.createDeploymentStatus({
-                owner: "sika-example-user",
-                repo: "gs-1",
-                deployment_id: response.data.id,
-                state: "success",
-                comment: "Yesss",
-                log_url: "https://oxs.cz",
-              })
+              output = response.data.id
+            })
+            return output
+      - uses: actions/github-script@v6
+        with:
+          result-encoding: string
+          script: |
+            github.rest.repos.createDeploymentStatus({
+              owner: "sika-example-user",
+              repo: "gs-1",
+              deployment_id: ${{steps.start.outputs.result}},
+              state: "success",
+              comment: "Yesss",
+              log_url: "https://oxs.cz",
             })
