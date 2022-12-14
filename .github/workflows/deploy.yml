@@ -11,12 +11,10 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            console.log(JSON.stringify(context, null, 2))
-            github.rest.repos.createDeployment({
+            (JSON.stringify(context, null, 2))
+            console.log(github.rest.actions.getPendingDeploymentsForRun({
               owner: "sika-example-user",
               repo: "gs-1",
-              ref: "main",
-              payload: '{ "deploy": "migrate" }',
-              description: 'Deploy request from hubot',
-              production_environment: true,
-            })
+              run_id: ${{github.run_id}},
+            }))
+
