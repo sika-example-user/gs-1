@@ -29,6 +29,6 @@ jobs:
                 deployment_id: response.data.id,
                 state: "success",
                 comment: "Yesss",
-                log_url: "https://google.com",
+                log_url: "https://sika.io",
               })
             })
