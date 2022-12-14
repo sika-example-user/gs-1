@@ -25,7 +25,7 @@ jobs:
             octokit.rest.repos.createDeploymentStatus({
               owner: "sika-example-user",
               repo: "gs-1",
-              deployment_id: "${{deployment_id}}",
+              deployment_id: "${{steps.deployment.outputs.deployment_id}}",
               state: "success",
               comment: "Yesss",
               log_url: "https://google.com",
