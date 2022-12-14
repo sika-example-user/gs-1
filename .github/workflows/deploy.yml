@@ -6,8 +6,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/github-script@v6
         with:
           script: |
             console.log(JSON.stringify(context, null, 2))
+            github.rest.repos.createDeployment({
+              owner: "sika-example-user",
+              repo: "gs-1",
+              ref: "main",
+              payload: '{ "deploy": "migrate" }',
+              description: 'Deploy request from hubot',
+              production_environment: true,
+            }
