@@ -14,6 +14,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            let url = "https://is.oxs.cz"
             let deployment = await github.rest.repos.createDeployment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -27,5 +28,11 @@ jobs:
               deployment_id: deployment.data.id,
               state: "success",
               comment: "Yesss",
-              log_url: "https://os.oxs.cz",
+              log_url: url,
             })
+            octokit.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.payload.after,
+              body: "Deployed to "+url,
+            });
