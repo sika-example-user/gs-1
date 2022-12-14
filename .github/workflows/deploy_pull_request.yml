@@ -24,7 +24,7 @@ jobs:
               repo: context.repo.repo,
               ref: context.sha,
               production_environment: false,
-              environment: "pull-1",
+              environment: "pull-"+context.issue.number,
               transient_environment: true,
               required_contexts: [],
             })
