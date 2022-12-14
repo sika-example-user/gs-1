@@ -22,6 +22,14 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
+            octokit.rest.repos.createDeploymentStatus({
+              owner: "sika-example-user",
+              repo: "gs-1",
+              deployment_id: "${{deployment_id}}",
+              state: "success",
+              comment: "Yesss",
+              log_url: "https://google.com",
+            })
             github.rest.actions.getPendingDeploymentsForRun({
               owner: "sika-example-user",
               repo: "gs-1",
