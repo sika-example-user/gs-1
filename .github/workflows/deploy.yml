@@ -27,19 +27,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: 'deliverybot/helm@v1'
+      - name: Deploy
+        uses: WyriHaximus/github-action-helm3@v2
         with:
-          release: 'example-${{ github.run_id }}'
-          namespace: 'default'
-          chart: 'sikalabs/one-image'
-          token: '${{ github.token }}'
-          repo: 'https://helm.sikalabs.io'
-          repo-alias: sikalabs
-          values: |
-            image=ttl.sh/example-${{ github.run_id }}
-            host=example-${{ github.run_id }}.k8s.sikademo.com
-        env:
-          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+          exec: |
+            helm upgrade --install example-${{ github.run_id }} \
+              one-image --repo https://helm.sikalabs.io \
+              --set image=ttl.sh/example-${{ github.run_id }} \
+              --set host=example-${{ github.run_id }}.k8s.sikademo.com
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
       - uses: actions/github-script@v6
         with:
           script: |
