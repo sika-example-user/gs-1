@@ -32,16 +32,16 @@ jobs:
         uses: WyriHaximus/github-action-helm3@v2
         with:
           exec: |
-            helm upgrade --install example-pull-${{ ${{ github.event.number }} }} \
+            helm upgrade --install example-pull-${{ github.event.number }} \
               one-image --repo https://helm.sikalabs.io \
-              --set image=ttl.sh/example-${{ ${{ github.event.number }} }} \
-              --set host=example-pull-${{ ${{ github.event.number }} }}.k8s.sikademo.com
+              --set image=ttl.sh/example-${{ github.event.number }} \
+              --set host=example-pull-${{ github.event.number }}.k8s.sikademo.com
           kubeconfig: '${{ secrets.KUBECONFIG }}'
       - uses: actions/github-script@v6
         with:
           script: |
             console.log(JSON.stringify(context))
-            let url = "example-pull-${{ ${{ github.event.number }} }}.k8s.sikademo.com"
+            let url = "example-pull-${{ github.event.number}}.k8s.sikademo.com"
             let deployment = await github.rest.repos.createDeployment({
               owner: context.repo.owner,
               repo: context.repo.repo,
