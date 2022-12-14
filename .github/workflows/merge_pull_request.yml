@@ -7,8 +7,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    permissions: write-all
-    # permissions:
+    # permissions: write-all
+    permissions:
+      repository-projects: write
     #   deployments: write
     #   contents: write
     #   issues: write
