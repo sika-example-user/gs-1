@@ -6,8 +6,8 @@ on:
 
 
 jobs:
-  clean-up:
-    name: Remove deployment & environment
+  helm-uninstall:
+    name: Helm uninstall
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,11 @@ jobs:
           exec: |
             helm uninstall example-pull-${{ github.event.number }}
           kubeconfig: '${{ secrets.KUBECONFIG }}'
+  remove-deployment-and-environment:
+    name: Remove deployment & environment
+    runs-on: ubuntu-latest
+
+    steps:
       - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.TOKEN_DELETE_ENVIRONMENTS }}
