@@ -15,6 +15,8 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               ref: context.payload.after,
+              payload: '{ "deploy": "migrate" }',
+              description: 'Deploy request from hubot',
               production_environment: true,
             }).then(response => {
               github.rest.repos.createDeploymentStatus({
