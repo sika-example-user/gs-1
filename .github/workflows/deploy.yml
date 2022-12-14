@@ -32,9 +32,9 @@ jobs:
               comment: "Yesss",
               log_url: url,
             })
-            github.rest.repos.createCommitComment({
+            github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              commit_sha: context.payload.after,
+              issue_number: context.issue.number,
               body: "Deployed to "+url,
             });
