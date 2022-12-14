@@ -29,5 +29,5 @@ jobs:
               deployment_id: deployment.data.id,
               state: "success",
               comment: "Yesss",
-              log_url: "https://sika.io",
+              log_url: "https://os.oxs.cz",
             })
