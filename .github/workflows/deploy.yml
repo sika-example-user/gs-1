@@ -15,17 +15,15 @@ jobs:
         with:
           script: |
             let deployment = await github.rest.repos.createDeployment({
-              owner: "sika-example-user",
-              repo: "gs-1",
-              ref: "main",
-              payload: '{ "deploy": "migrate" }',
-              description: 'Deploy request from hubot',
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.after,
               production_environment: true,
               required_contexts: [],
             })
             github.rest.repos.createDeploymentStatus({
-              owner: "sika-example-user",
-              repo: "gs-1",
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               deployment_id: deployment.data.id,
               state: "success",
               comment: "Yesss",
