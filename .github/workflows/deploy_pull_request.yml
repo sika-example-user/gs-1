@@ -10,6 +10,8 @@ jobs:
     permissions:
       deployments: write
       contents: write
+      issues: write
+
 
     steps:
       - uses: actions/github-script@v6
