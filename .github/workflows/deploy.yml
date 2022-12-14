@@ -7,8 +7,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    permissions: write-all
-      # deployments: write
+    # permissions: write-all
+    permissions:
+      deployments: write
+      contents: write
 
     steps:
       - uses: actions/github-script@v6
