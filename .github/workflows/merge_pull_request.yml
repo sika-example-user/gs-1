@@ -16,6 +16,12 @@ jobs:
 
 
     steps:
+      - name: Uninstall
+        uses: WyriHaximus/github-action-helm3@v2
+        with:
+          exec: |
+            helm uninstall example-pull-${{ github.event.number }}
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
       - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.TOKEN_DELETE_ENVIRONMENTS }}

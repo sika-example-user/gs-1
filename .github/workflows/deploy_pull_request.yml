@@ -34,7 +34,7 @@ jobs:
           exec: |
             helm upgrade --install example-pull-${{ github.event.number }} \
               one-image --repo https://helm.sikalabs.io \
-              --set image=ttl.sh/example-${{ github.event.number }} \
+              --set image=ttl.sh/example-${{ github.run_id }} \
               --set host=example-pull-${{ github.event.number }}.k8s.sikademo.com
           kubeconfig: '${{ secrets.KUBECONFIG }}'
       - uses: actions/github-script@v6
