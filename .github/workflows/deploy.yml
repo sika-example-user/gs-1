@@ -22,6 +22,7 @@ jobs:
               description: 'Deploy request from hubot',
               production_environment: true,
               required_contexts: [],
+            })
             github.rest.repos.createDeploymentStatus({
               owner: "sika-example-user",
               repo: "gs-1",
