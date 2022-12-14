@@ -13,6 +13,7 @@ jobs:
       deployments: write
       contents: write
       issues: write
+      pull-requests: write
 
 
     steps:
