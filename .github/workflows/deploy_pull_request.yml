@@ -1,0 +1,40 @@
+on:
+  pull_request:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # permissions: write-all
+    permissions:
+      deployments: write
+      contents: write
+
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            let url = "https://is.oxs.cz"
+            let deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.after,
+              production_environment: false,
+              environment: "pull-1"
+              required_contexts: [],
+            })
+            github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: deployment.data.id,
+              state: "success",
+              comment: "Yesss",
+              log_url: url,
+            })
+            github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.payload.after,
+              body: "Deployed to "+url,
+            });
