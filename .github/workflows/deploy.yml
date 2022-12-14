@@ -12,9 +12,11 @@ jobs:
         with:
           script: |
             (JSON.stringify(context, null, 2))
-            console.log(github.rest.actions.getPendingDeploymentsForRun({
+            github.rest.actions.getPendingDeploymentsForRun({
               owner: "sika-example-user",
               repo: "gs-1",
               run_id: ${{github.run_id}},
-            }))
+            }).then(response => {
+              console.log(response)
+            })
 
